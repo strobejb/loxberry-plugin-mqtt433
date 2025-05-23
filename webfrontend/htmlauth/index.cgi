@@ -65,7 +65,7 @@ foreach (split(/&/,$ENV{"QUERY_STRING"}))
 # ---------------------------------------
 # Set parameters coming in - GET over POST
 # ---------------------------------------
-if ( !$query{'txpin'} )   { if ( param('txpin')  ) { $apikey = quotemeta(param('txpin'));         } 
+if ( !$query{'txpin'} )   { if ( param('txpin')  ) { $txpin = quotemeta(param('txpin'));         } 
 else { $txpin = $txpin;  } } else { $txpin = quotemeta($query{'txpin'});   }
 
 if ( !$query{'enabled'} )   { if ( param('enabled')  ) { $enabled = quotemeta(param('enabled'));         } 
