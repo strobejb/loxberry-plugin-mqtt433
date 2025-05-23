@@ -25,7 +25,7 @@ jobs:
     - name: Update module version with tag
       shell: bash
       run: |
-        sed -i -E "s|VERSION.*|VERSION = '${{steps.extractversion.outputs.VERSION}}'|g" release.cfg
+        sed -i -E "s|VERSION.*|VERSION=${{steps.extractversion.outputs.VERSION}}|g" release.cfg
         git diff
         cat release.cfg
 
