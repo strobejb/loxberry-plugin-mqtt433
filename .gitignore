@@ -1,3 +1,8 @@
+# files used for testing/mocking loxberry installs
+config/general.json
+RPi/
+*.log
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

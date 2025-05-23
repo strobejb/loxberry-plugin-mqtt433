@@ -1,0 +1,63 @@
+
+<div role=\"main\" class=\"ui-content\">
+<div class=\"ui-body ui-body-a ui-corner-all loxberry-logo\">
+<div style=\"margin: 5%;\">
+
+<h2>Settings</h2>
+									<form method="post" data-ajax="false" name="main_form" id="main_form" action="./index.cgi">
+										<input type="hidden" name="savedata" id="savedata" value="1">
+											<div class="form-group">
+												<table class="formtable" border="0" width="100%">
+													<tr>
+														<td width="25%">
+															<label id="labelusername">GPIO Tx PIN</label>
+														</td>
+														<td width="50%">
+															<input id="txpin" name="txpin" type="number" class="textfield" min="1" max="40"
+																value="<!--$txpin-->" data-validation-error-msg="* Please enter the GPIO PIN for Transmit">
+														</td>
+														<td width="25%">
+															&nbsp;
+														</td>
+													</tr>
+													<tr>
+														<td width="25%">
+															<label id="labelmsenabled">Enable this Plugin:</label>
+														</td>
+														<td width="50%">
+														<fieldset>
+																<select id="enabled" name="enabled" data-role="flipswitch">
+																	<!--$Enabledlist-->
+																</select>
+															</fieldset>
+														</td>
+														<td width="25%">
+															&nbsp;
+														</td>
+													</tr>
+													
+													<tr>
+														<td width="25%">&nbsp</td>
+														<td width="50%">
+															<input id="do" name="do" type="submit" value="Save">
+														</td>
+														<td width="25%">
+															&nbsp;
+														</td>
+													</tr>		
+											</table>
+										</div>
+									</form>
+<!--$restartMsg-->
+
+
+<script>
+		var $messages = $('#form-error-message');
+		$.validate({
+			modules : 'security',
+			errorMessagePosition : $messages,
+		});
+</script>
+</div>
+</div>
+</div>
