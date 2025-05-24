@@ -64,11 +64,12 @@ echo "<INFO> Installing systemd service"
 cp dpkg/mqtt433.service /lib/systemd/system/mqtt433.service
 
 # set perms
-sudo chmod 644 /lib/systemd/system/mqtt433.service
+
+#sudo chmod 644 /lib/systemd/system/mqtt433.service
 
 systemctl enable mqtt433.service
 systemctl status mqtt433.service
-systemctl daemon-reload
+journalctl -f -u mqtt433.service
 
 echo "<INFO> Reloading systemd config"
 systemctl daemon-reload
