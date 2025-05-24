@@ -21,17 +21,21 @@ jobs:
       id: extractversion
       shell: bash
       run: echo "VERSION=$(echo ${{github.event.inputs.tag}} | cut -d "v" -f 2)" >> $GITHUB_OUTPUT
-      
+
     - name: Update module version with tag
       shell: bash
       run: |
+        sed -i -E "s|VERSION.*|VERSION=${{steps.extractversion.outputs.VERSION}}|g" plugin.cfg
         sed -i -E "s|VERSION.*|VERSION=${{steps.extractversion.outputs.VERSION}}|g" release.cfg
         git diff
+        cat plugin.cfg
         cat release.cfg
 
-    - name: Zip Folder
+    # Building is simply zipping the entire source folder
+    - name: Build Plugin
       run: zip -r ${{ github.event.repository.name }}.zip . -x '*.git*' '*.github*' 
-      
+
+    # Create a new tag for this release
     - name: Tag release
       run: |
         git config user.name github-actions
