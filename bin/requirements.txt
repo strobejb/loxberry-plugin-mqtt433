@@ -1,3 +1,7 @@
 setuptools
-rpi_lgpio
 paho-mqtt
+
+# rpi_lgpio # needed for raspberry pi latest images. but does not work
+#           # on older image (loxberry) due to GLIBC incompatibility
+
+rpi_gpio    # works on loxberry 3

@@ -69,7 +69,7 @@ def mqtt_gateway_433(host, port, username, password, txpin):
     client.on_message = on_message
     client.on_subscribe = on_subscribe
     client.username_pw_set(username=username, password=password)
-    client.connect(host=host, port=port, keepalive=60)
+    client.connect(host=host, port=int(port), keepalive=60)
 
     drivers.tx433.TRANSMIT_PIN = txpin
 
@@ -108,10 +108,9 @@ def main(args):
         sys.exit(-1)
         
     mqttd = data["Mqtt"]
-    logging.info(f'MQTT Broker: {mqttd["Brokeruser"]}@{mqttd["Brokerhost"]}:{mqttd["Brokerport"]}')
-
+    logging.info(f'MQTT Broker: {mqttd["Brokeruser"]}@{mqttd["Brokerhost"]}:{int(mqttd["Brokerport"])}')
     
-    mqtt_gateway_433(mqttd["Brokerhost"], mqttd["Brokerport"],
+    mqtt_gateway_433(mqttd["Brokerhost"], int(mqttd["Brokerport"]),
                         mqttd["Brokeruser"], mqttd["Brokerpass"], 
                         txpin)
 
