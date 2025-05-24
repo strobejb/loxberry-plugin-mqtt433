@@ -60,8 +60,16 @@ echo "<INFO> Plugin Data folder is: $PDATA"
 echo "<INFO> Plugin Log folder (on RAMDISK!) is: $PLOG"
 echo "<INFO> Plugin CONFIG folder is: $PCONFIG"
 
-echo "<INFO> Updating systemd service config"
-cp dpkg/mqtt433d.service /lib/systemd/system/mqtt433d\@.service
+echo "<INFO> Installing systemd service"
+cp dpkg/mqtt433.service /lib/systemd/system/mqtt433.service
+
+# set perms
+sudo chmod 644 /lib/systemd/system/mqtt433.service
+
+systemctl enable mqtt433.service
+systemctl status mqtt433.service
+systemctl daemon-reload
+
 echo "<INFO> Reloading systemd config"
 systemctl daemon-reload
 
