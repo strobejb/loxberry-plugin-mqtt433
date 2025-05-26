@@ -67,12 +67,14 @@ cp dpkg/mqtt433.service /lib/systemd/system/mqtt433.service
 
 #sudo chmod 644 /lib/systemd/system/mqtt433.service
 
+echo "<INFO> Reloading systemd config"
+systemctl daemon-reload
+
+echo "<INFO> Starting systemd config"
 systemctl enable mqtt433.service
 systemctl status mqtt433.service
 #journalctl -f -u mqtt433.service
 
-echo "<INFO> Reloading systemd config"
-systemctl daemon-reload
 
 echo "<INFO> done!"
 # Exit with Status 0
