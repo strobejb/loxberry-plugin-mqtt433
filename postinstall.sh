@@ -52,10 +52,10 @@ cat REPLACELBPBINDIR/bin/requirements.txt
 $PIP3 install --upgrade pip wheel
 
 echo "<INFO> requirements.txt:"
-cat REPLACELBPBINDIR/bin/requirements.txt 
+cat REPLACELBPBINDIR/requirements.txt 
 
 echo "<INFO> installing..."
-$PIP3 install --verbose --requirement REPLACELBPBINDIR/bin/requirements.txt 
+$PIP3 install --verbose --requirement REPLACELBPBINDIR/requirements.txt 
 
 
 deactivate
