@@ -46,13 +46,20 @@ python3 -m venv REPLACELBPBINDIR/venv
 
 echo "<INFO> installing latest version of dependencies for python3..."
 PIP3="pip3"
-#PIP3="REPLACELBPBINDIR/venv/bin/pip3"
+
+
+cat REPLACELBPBINDIR/bin/requirements.txt 
 $PIP3 install --upgrade pip wheel
-$PIP3 install setuptools
-$PIP3 install rpi_lgpio
-$PIP3 install paho-mqtt
+
+echo "<INFO> requirements.txt:"
+cat REPLACELBPBINDIR/bin/requirements.txt 
+
+echo "<INFO> installing..."
+$PIP3 install --verbose --requirement REPLACELBPBINDIR/bin/requirements.txt 
+
 
 deactivate
+echo "<INFO> done!"
 
 # Exit with Status 0
 exit 0

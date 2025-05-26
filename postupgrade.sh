@@ -22,8 +22,7 @@ rm -rf /tmp/$ARGV1/_upgrade
 echo "<INFO> installing latest version of dependencies for python3..."
 PIP3="REPLACELBPBINDIR/venv/bin/pip3"
 $PIP3 install --user --upgrade setuptools wheel
-$PIP3 install --user --upgrade rpi_lgpio
-$PIP3 install --user --upgrade paho-mqtt
+$PIP3 install --user --upgrade --requirement REPLACELBPBINDIR/bin/requirements.txt
 
 
 # Exit with Status 0
