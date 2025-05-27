@@ -97,7 +97,7 @@ def main(args):
         sys.exit(-1)
 
     for e,v in os.environ.items():
-        print(f'{e}={v}')
+        logging.info(f'{e}={v}')
 
     configbase = os.environ.get("LBSCONFIG", default="config")
     configpath = os.path.join(configbase, "general.json")
