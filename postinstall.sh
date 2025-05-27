@@ -47,8 +47,6 @@ python3 -m venv REPLACELBPBINDIR/venv
 echo "<INFO> installing latest version of dependencies for python3..."
 PIP3="pip3"
 
-
-cat REPLACELBPBINDIR/bin/requirements.txt 
 $PIP3 install --upgrade pip wheel
 
 echo "<INFO> requirements.txt:"
