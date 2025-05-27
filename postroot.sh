@@ -45,6 +45,7 @@ PLOG=$LBPLOG/$PDIR # Note! This is stored on a Ramdisk now!
 PCONFIG=$LBPCONFIG/$PDIR
 PSBIN=$LBPSBIN/$PDIR
 PBIN=$LBPBIN/$PDIR
+SCONFIG=$LBSCONFIG
 
 echo -n "<INFO> Current working folder is: "
 pwd
@@ -59,6 +60,7 @@ echo "<INFO> Plugin Template folder is: $PTEMPL"
 echo "<INFO> Plugin Data folder is: $PDATA"
 echo "<INFO> Plugin Log folder (on RAMDISK!) is: $PLOG"
 echo "<INFO> Plugin CONFIG folder is: $PCONFIG"
+echo "<INFO> System CONFIG folder is: $SCONFIG"
 
 echo "<INFO> Installing systemd service"
 cp dpkg/mqtt433.service /lib/systemd/system/mqtt433.service
