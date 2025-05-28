@@ -35,12 +35,12 @@ def load_drivers():
 
 
 def on_connect(client, userdata, flags, reason_code, properties=None):   
-    print(f'Connected. Subscribing to: {MQTT_TOPIC}')
+    logging.info(f'Connected. Subscribing to: {MQTT_TOPIC}')
     client.subscribe(MQTT_TOPIC)
 
 
 def on_message(client, userdata, message, properties=None):
-    print(f"{dt.now()} Received message {message.payload} on topic '{message.topic}' with QoS {message.qos}")
+    logging.info(f"{dt.now()} Received message {message.payload} on topic '{message.topic}' with QoS {message.qos}")
     
     #
     # topic structure:
@@ -54,13 +54,13 @@ def on_message(client, userdata, message, properties=None):
         device  = m.group(2)
         command = message.payload.decode('utf-8')
 
-        print(f'{driver.__name__}/{device}: {command}')
+        logging.info(f'{driver.__name__}/{device}: {command}')
         driver.transmit_command(device, command)
     else:
-        print(f'No driver for command: {command}')
+        logging.warning(f'No driver for command: {command}')
 
 def on_subscribe(client, userdata, mid, qos, properties=None):    
-    print(f"{dt.now()} Subscribed with QoS {qos}")
+    logging.info(f"{dt.now()} Subscribed with QoS {qos}")
 
 
 def mqtt_gateway_433(host, port, username, password, txpin):
@@ -73,7 +73,7 @@ def mqtt_gateway_433(host, port, username, password, txpin):
 
     drivers.tx433.TRANSMIT_PIN = txpin
 
-    print('waiting....')
+    logging.info('entering message loop....')
     client.loop_forever()
 
 
@@ -93,16 +93,21 @@ def main(args):
     enabled = pluginconfig.get('MQTT433', 'ENABLED')
 
     if enabled != "1":
-        logging.warning("Plugin is not enabled in configuration - exiting")
+        logging.critical("Plugin is not enabled in configuration - exiting")
         sys.exit(-1)
 
-    for e,v in os.environ.items():
-        logging.info(f'{e}={v}')
+    #for e,v in os.environ.items():
+    #    logging.info(f'{e}={v}')
 
     configbase = os.environ.get("LBSCONFIG", default="config")
     configpath = os.path.join(configbase, "general.json")
     
-    logging.info(f'Reading: {configpath}')
+    logging.info(f'Reading config: {configpath}')
+    
+    if not os.path.exists(configpath):
+        logging.critical("Plugin configuration file missing {0}".format(configpath))
+        sys.exit(-1)
+
     with open(configpath, "r") as f:
         data = json.load(f)
 
