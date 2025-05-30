@@ -63,11 +63,11 @@ echo "<INFO> Plugin CONFIG folder is: $PCONFIG"
 echo "<INFO> System CONFIG folder is: $SCONFIG"
 
 echo "<INFO> Installing systemd service"
-cp dpkg/mqtt433.service /lib/systemd/system/mqtt433.service
+#sed -i "s|REPLACELBPBINDIR|$PBIN|g" bin/mqtt433.service
+cp bin/mqtt433.service /lib/systemd/system/mqtt433.service
 
 # set perms
-
-#sudo chmod 644 /lib/systemd/system/mqtt433.service
+sudo chmod 644 /lib/systemd/system/mqtt433.service
 
 echo "<INFO> Reloading systemd config"
 systemctl daemon-reload

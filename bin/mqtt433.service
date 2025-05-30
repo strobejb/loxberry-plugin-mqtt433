@@ -4,15 +4,13 @@ Requires=network.target
 After=loxberry.service
 
 [Service]
-#Environment=LBSCONFIG=/opt/loxberry/config/system
-#ExecStart=REPLACELBPBINDIR/venv/bin/python3 REPLACELBPBINDIR/mqtt433.py --logfile=REPLACELBPLOGDIR/mqtt433.log --configfile=REPLACELBPCONFIGDIR/mqtt433.cfg
 ExecStart=REPLACELBPBINDIR/mqtt433.sh
 Restart=on-failure
 RestartSec=3
 StandardOutput=journal
 StandardError=journal
-User=loxberry
-Group=loxberry
+#User=loxberry
+#Group=loxberry
 
 [Install]
 WantedBy=multi-user.target
