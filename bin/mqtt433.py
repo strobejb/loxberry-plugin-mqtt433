@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import configparser
 import json
 import logging
@@ -81,7 +83,6 @@ def main(args):
 
     load_drivers()
 
-    print(os.getcwd())
     print(os.path.realpath(args.configfile))
     if not os.path.exists(args.configfile):
         logging.critical("Plugin configuration file missing {0}".format(args.configfile))
@@ -122,12 +123,24 @@ def main(args):
                         mqttd["Brokeruser"], mqttd["Brokerpass"], 
                         txpin)
 
+def lox_loglevel(loxlevel):
+    if loxlevel == 3: return logging.ERROR
+    if loxlevel == 4: return logging.WARNING
+    if loxlevel == 6: return logging.INFO
+    if loxlevel == 7: return logging.DEBUG
+    if loxlevel == 0 or loxlevel == -1: return logging.NOTSET    
+    print("Unknown log level: {loxlevel}")
+    return logging.NOTSET    
     
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Loxberry MQTT to RF433 Plugin.")
     parser.add_argument("--logfile", 
                         default="mqtt433.log",
+                        help="specifies logfile path")
+    parser.add_argument("--loglevel", 
+                        default=3, # error
+                        type=int,
                         help="specifies logfile path")
     parser.add_argument("--configfile", 
                         default="config\\mqtt433.cfg",
@@ -138,7 +151,7 @@ if __name__ == "__main__":
     #
     # Configure logging
     #
-    logging.getLogger().setLevel(logging.DEBUG)
+    logging.getLogger().setLevel(lox_loglevel(args.loglevel))
     logging.basicConfig(filename=args.logfile,
                         filemode='w', 
                         level=logging.DEBUG,

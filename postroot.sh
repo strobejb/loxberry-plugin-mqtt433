@@ -62,21 +62,24 @@ echo "<INFO> Plugin Log folder (on RAMDISK!) is: $PLOG"
 echo "<INFO> Plugin CONFIG folder is: $PCONFIG"
 echo "<INFO> System CONFIG folder is: $SCONFIG"
 
-echo "<INFO> Installing systemd service"
-#sed -i "s|REPLACELBPBINDIR|$PBIN|g" bin/mqtt433.service
-cp bin/mqtt433.service /lib/systemd/system/mqtt433.service
+#echo "<INFO> Installing systemd service"
+#cp bin/mqtt433.service /lib/systemd/system/mqtt433.service
 
 # set perms
-sudo chmod 644 /lib/systemd/system/mqtt433.service
+#sudo chmod 644 /lib/systemd/system/mqtt433.service
 
-echo "<INFO> Reloading systemd config"
-systemctl daemon-reload
+#echo "<INFO> Reloading systemd config"
+#systemctl daemon-reload
 
-echo "<INFO> Starting systemd config"
-systemctl enable mqtt433.service
-systemctl status mqtt433.service
+#echo "<INFO> Starting systemd service"
+#systemctl enable mqtt433.service
+#systemctl status mqtt433.service
 #journalctl -f -u mqtt433.service
 
+echo "<INFO> Start MQTT433 gateway"
+echo "$PBIN/wrapperd.sh"
+
+su loxberry -c "$PBIN/wrapperd.sh restart"
 
 echo "<INFO> done!"
 # Exit with Status 0

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# This daemon will be executed as user "root".
+
+PLUGINNAME=REPLACELBPPLUGINDIR
+PATH="/sbin:/bin:/usr/sbin:/usr/bin:$LBHOMEDIR/bin:$LBHOMEDIR/sbin"
+
+ENVIRONMENT=$(cat /etc/environment)
+export $ENVIRONMENT
+
+# change to loxberry user before we run the script
+su loxberry -c "$LBHOMEDIR/bin/plugins/${PLUGINNAME}/wrapper.sh start"
+
+exit 0
