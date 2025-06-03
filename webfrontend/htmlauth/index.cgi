@@ -38,6 +38,8 @@ our $MSselectlist;
 our $txpin;
 our $enabled;
 our $Enabledlist;
+our $pid;
+our $pidmsg;
 
 # ---------------------------------------
 # Read Settings
@@ -126,6 +128,17 @@ if ($enabled eq "1") {
 		$phraseplugin 			= new Config::Simple($languagefileplugin);
 
 
+
+# PID of daemon
+$pname = "REPLACELBPBINDIR/mqtt433.py"; 
+$pid = `pgrep -f $pname`;
+
+if([ $pid gt 0] ) {
+  $pidmsg = "Running: (PID $pid)";
+}
+else {
+  $pidmsg = "Not Running";
+}
 
 # Title
 $template_title = $phrase->param("TXT0000") . ": MQTT433";
