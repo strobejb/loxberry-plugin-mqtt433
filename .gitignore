@@ -2,6 +2,7 @@
 config/general.json
 RPi/
 *.log
+*.zip
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
