@@ -38,7 +38,6 @@ our $MSselectlist;
 our $txpin;
 our $enabled;
 our $Enabledlist;
-our $pid;
 our $pidmsg;
 
 # ---------------------------------------
@@ -130,8 +129,8 @@ if ($enabled eq "1") {
 
 
 # PID of daemon
-$pname = "REPLACELBPBINDIR/mqtt433.py"; 
-$pid = `pgrep -f $pname`;
+my $pname = "REPLACELBPBINDIR/mqtt433.py"; 
+my $pid = `pgrep -f $pname`;
 
 if([ $pid gt 0] ) {
   $pidmsg = "Running: (PID $pid)";
