@@ -50,16 +50,19 @@ def on_message(client, userdata, message, properties=None):
     # i.e.
     #   mqtt433/westin/fan/command speed3
     #
+    command = message.payload.decode('utf-8')
     m = re.search(r'^mqtt433/([a-zA-Z0-9_]+)\/([a-zA-Z0-9_]+)\/command$', message.topic)
     if m and m.group(1) in DRIVERS.keys():
         driver  = DRIVERS[m.group(1)]
-        device  = m.group(2)
-        command = message.payload.decode('utf-8')
+        device  = m.group(2)        
 
         logging.info(f'{driver.__name__}/{device}: {command}')
         driver.transmit_command(device, command)
+    elif m:
+        logging.warning(f'No driver \'{m.group(1)}\' for command: {command}')
     else:
         logging.warning(f'No driver for command: {command}')
+
 
 def on_subscribe(client, userdata, mid, qos, properties=None):    
     logging.info(f"{dt.now()} Subscribed with QoS {qos}")
